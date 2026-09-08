@@ -3,6 +3,8 @@
 ## Notes: Reversed vehicle keybindings and a compact ElvUI vehicle HUD.
 ## Author: Cantrelle (Direction6275)
 ## Version: @project-version@
+## X-Curse-Project-ID: 1686826
+## X-Wago-ID: XKqA2jKy
 ## X-Website: https://github.com/Direction6275/VehicleBars
 ## X-License: All Rights Reserved
 ## OptionalDeps: ElvUI
