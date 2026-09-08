@@ -29,7 +29,7 @@ The release workflow checks both IDs and both upload secrets before publishing. 
 
 ## Build a preview
 
-Open [Package Preview](https://github.com/Direction6275/VehicleBars/actions/workflows/package-preview.yml), choose **Run workflow**, and download the `VehicleBars-preview` artifact from the completed run. Extract the addon ZIP inside that artifact. Preview runs never upload to CurseForge, Wago, or GitHub Releases and need no upload tokens.
+Open [Package Preview](https://github.com/Direction6275/VehicleBars/actions/workflows/package-preview.yml), choose **Run workflow**, and download the `VehicleBars-<version>.zip` artifact from the completed run. This is the installable addon ZIP, with no outer archive to extract first. Preview runs never upload to CurseForge, Wago, or GitHub Releases and need no upload tokens.
 
 ```powershell
 gh workflow run package-preview.yml --repo Direction6275/VehicleBars --ref main

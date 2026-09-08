@@ -15,3 +15,4 @@ ignore:
   - .github
   - .local-tests
   - dist
+  - preview-package
