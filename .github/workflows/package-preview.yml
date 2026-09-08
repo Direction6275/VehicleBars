@@ -18,7 +18,7 @@ jobs:
       - name: Build preview zip
         uses: BigWigsMods/packager@v2
         with:
-          args: -d -g retail -r preview-package
+          args: -d -g retail -r ./preview-package
 
       - name: Upload preview zip
         uses: actions/upload-artifact@v7
