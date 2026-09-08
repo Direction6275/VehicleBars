@@ -1,0 +1,13 @@
+## Interface: 120100
+## Title: Vehicle Bars
+## Notes: Reversed vehicle keybindings and a compact ElvUI vehicle HUD.
+## Author: Cantrelle (Direction6275)
+## Version: @project-version@
+## X-Website: https://github.com/Direction6275/VehicleBars
+## X-License: All Rights Reserved
+## OptionalDeps: ElvUI
+## Dependencies: Blizzard_ActionBar, Blizzard_OverrideActionBar
+
+VehicleBars.lua
+VehicleHUDSecure.lua
+VehicleHUD.lua

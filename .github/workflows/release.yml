@@ -1,0 +1,51 @@
+name: Package and Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      CF_API_KEY: ${{ secrets.CF_API_KEY }}
+      WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+      GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Clone project
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check upload configuration
+        shell: bash
+        run: |
+          missing=0
+          if ! grep -Eq '^## X-Curse-Project-ID: [1-9][0-9]*[[:space:]]*$' VehicleBars/VehicleBars.toc; then
+            echo "::error::Add the Vehicle Bars CurseForge project ID to VehicleBars/VehicleBars.toc. See RELEASING.md."
+            missing=1
+          fi
+          if ! grep -Eq '^## X-Wago-ID: [[:alnum:]]+[[:space:]]*$' VehicleBars/VehicleBars.toc; then
+            echo "::error::Add the Vehicle Bars Wago project ID to VehicleBars/VehicleBars.toc. See RELEASING.md."
+            missing=1
+          fi
+          for name in CF_API_KEY WAGO_API_TOKEN; do
+            if [[ -z "${!name}" ]]; then
+              echo "::error::Missing repository secret: $name. See RELEASING.md."
+              missing=1
+            fi
+          done
+          exit "$missing"
+
+      - name: Package and release
+        uses: BigWigsMods/packager@v2
+        with:
+          args: -g retail

@@ -1,0 +1,17 @@
+package-as: VehicleBars
+
+enable-nolib-creation: no
+
+move-folders:
+  VehicleBars/VehicleBars: VehicleBars
+
+manual-changelog:
+  filename: CHANGELOG.md
+  markup-type: markdown
+
+ignore:
+  - README.md
+  - RELEASING.md
+  - .github
+  - .local-tests
+  - dist

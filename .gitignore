@@ -1,0 +1,5 @@
+dist/
+.local-tests/
+.release/
+.env
+.env.*
