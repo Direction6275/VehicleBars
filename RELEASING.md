@@ -40,16 +40,21 @@ gh workflow run package-preview.yml --repo Direction6275/VehicleBars --ref main
 1. Update `CHANGELOG.md` with the notes for this release. Its contents become the release notes on all three destinations. Keep older notes in Git history.
 2. Check Lua syntax and test the addon in game, especially combat vehicle entry/exit and clicking the HUD. Packaging success does not validate protected WoW behavior.
 3. Commit and push to `main`, then run Package Preview and inspect the ZIP.
-4. Create and push an annotated version tag. For the initial release:
+4. On GitHub, open **Releases > Draft a new release**, choose a new version tag targeting `main`, and click **Publish release**. Both `1.2` and `v1.2.0` style tags are supported. You can leave the notes blank; the packager uses the committed changelog.
 
-   ```powershell
-   git tag -a v1.2.0 -m "Vehicle Bars 1.2.0"
-   git push origin v1.2.0
-   ```
+Publishing a GitHub release starts **Package and Release**, which checks out that exact tag, uploads to CurseForge and Wago, and attaches the packaged ZIP to the GitHub release. Pushing a tag by itself does not publish; publish its GitHub release to start packaging. Draft releases do not start packaging.
 
-Pushing a `v*` tag starts **Package and Release**, which uploads to CurseForge and Wago and creates a GitHub release. BigWigs replaces `@project-version@` in the TOC and Lua with the tag-derived version. Untagged preview versions are development builds. The local checkout reports `1.2.0-dev`; update that debug fallback when beginning the next development version.
+BigWigs replaces `@project-version@` in the TOC and Lua with the tag-derived version. Untagged preview versions are development builds. The local checkout reports `1.2.0-dev`; update that debug fallback when beginning the next development version.
 
-Do not push a release tag just to test packaging. If a real release run fails, inspect its logs and each destination before retrying, since an upload may already have succeeded on another platform.
+## Recover a release that did not run
+
+For an existing release whose packaging never started, open **Actions > Package and Release > Run workflow**, select `main`, and enter the existing tag. The current workflow packages the original tag without moving or recreating it. For example:
+
+```powershell
+gh workflow run release.yml --repo Direction6275/VehicleBars --ref main -f tag=1.2
+```
+
+If a real release run failed after starting uploads, inspect its logs and each destination before retrying, since an upload may already have succeeded on another platform. Use Package Preview for build-only testing.
 
 ## Local installation
 
